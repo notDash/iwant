@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld';
 // import Login from '@/components/Login';
 import Login from '@/components/login/Login';
 import Register from '@/components/Register/Register';
+import Action from '@/components/Action/Action';
 import Home from '@/components/Home';
 
 Vue.use(Router);
@@ -24,6 +25,11 @@ export default new Router({
       path: '/register',
       name: 'Register',
       component: Register,
+    },
+    {
+      path: '/action',
+      name: 'Action',
+      component: Action,
     },
     {
       path: '/',

@@ -46,7 +46,8 @@ export default {
   padding: 0 15px;
   box-sizing: border-box;
   border-bottom: 1px solid #e2e2e2;
-  background: #9579ff;
+  background: #ffcccc;
+  // background: #9579ff;
   .icon-back {
     width: 14px;
     height: 14px;
