@@ -64,7 +64,13 @@
       </div>
       
     </div>
-
+    <toast 
+      v-model="showPositionValue" 
+      type="text" :time="800" 
+      is-show-mask 
+      :text="tipmsg"
+      :position="position">
+    </toast>
   </div>
 </template>
 
@@ -79,7 +85,8 @@ import {
   ButtonTab,
   ButtonTabItem,
   Panel,
-  XTable
+  XTable,
+  Toast,
 } from "vux";
 import NavHeader from "@/components/NavHeader/NavHeader";
 import moment from "moment";
@@ -108,6 +115,9 @@ const actions = [
 export default {
   data() {
     return {
+      tipmsg: '',
+      showPositionValue: false,
+      position: 'default',
       HISACTIONS: "HIS_ACTIONS",
       ACTIONS: "ACTIONS",
       userName: "李小抱",
@@ -151,12 +161,18 @@ export default {
     ButtonTab,
     ButtonTabItem,
     Panel,
-    XTable
+    XTable,
+    Toast
   },
   mounted() {
     this.currAction = this.getCurrActions();
   },
   methods: {
+    showPosition(position, tipmsg = '') {
+      this.position = position;
+      this.showPositionValue = true;
+      this.tipmsg = tipmsg;
+    },
     getCurrActions() {
       const actionsByName = localStorage.getItem(this.ACTIONS);
       let currActionsBuName = {
@@ -192,6 +208,7 @@ export default {
       localStorage.removeItem(this.ACTIONS);
       const hisAction = localStorage.getItem(this.HISACTIONS);
       localStorage.setItem(this.HISACTIONS, currActions);
+      this.showPosition('top', '清除成功');
     },
     optionStorage(key, name, actions) {
       const actionsByName = localStorage.getItem(key);
@@ -222,6 +239,7 @@ export default {
       const actions = this.optionStorage(this.ACTIONS, name, [action]);
       console.log(`******: ${actions}`);
       this.currAction = actions;
+      this.showPosition('top', '保存成功');
     },
     checkAction(action) {
       this.action = action;
